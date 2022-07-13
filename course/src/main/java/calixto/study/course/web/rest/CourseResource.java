@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Slf4j
 @RestController
-@RequestMapping("v1/admin/course")
+@RequestMapping("/v1/admin/course")
 public class CourseResource {
 
     private final CourseService service;
