@@ -1,7 +1,7 @@
 package calixto.study.course.service;
 
-import calixto.study.course.model.Course;
-import calixto.study.course.service.repository.CourseRepository;
+import calixto.study.core.model.Course;
+import calixto.study.core.service.repository.CourseRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;

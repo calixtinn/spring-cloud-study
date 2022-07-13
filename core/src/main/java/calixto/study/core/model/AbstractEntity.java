@@ -1,4 +1,4 @@
-package calixto.study.course.model;
+package calixto.study.core.model;
 
 import java.io.Serializable;
 

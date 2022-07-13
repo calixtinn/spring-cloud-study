@@ -1,6 +1,6 @@
-package calixto.study.course.service.repository;
+package calixto.study.core.service.repository;
 
-import calixto.study.course.model.Course;
+import calixto.study.core.model.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

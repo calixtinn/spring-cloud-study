@@ -1,6 +1,6 @@
 package calixto.study.course.web.rest;
 
-import calixto.study.course.model.Course;
+import calixto.study.core.model.Course;
 import calixto.study.course.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
