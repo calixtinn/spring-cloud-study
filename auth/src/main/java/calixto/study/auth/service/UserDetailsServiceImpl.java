@@ -1,10 +1,10 @@
 package calixto.study.auth.service;
 
+import calixto.study.auth.model.CustomUserDetails;
 import calixto.study.core.model.ApplicationUser;
 import calixto.study.core.service.repository.ApplicationUserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -23,8 +23,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         ApplicationUser user = repository.findByUsername(username).orElseThrow(() ->
             new UsernameNotFoundException(String.format("Application User '%s' not found", username)));
         log.info("Application user found: {}", user);
-        return User.withUsername(username)
-                .roles("ROLE_" + user.getRole())
-                .password(user.getPassword()).build();
+        return new CustomUserDetails(user);
     }
 }
