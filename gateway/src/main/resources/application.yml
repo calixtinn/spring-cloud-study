@@ -1,3 +1,6 @@
+logging:
+  level:
+    org.springframework.security: TRACE
 spring:
   application:
     name: gateway
@@ -24,5 +27,7 @@ eureka:
       defaultZone: http://localhost:8081/eureka/
     register-with-eureka: true
     fetch-registry: true
-
+#jwt:
+#  config:
+#    login-url: /auth/login
 

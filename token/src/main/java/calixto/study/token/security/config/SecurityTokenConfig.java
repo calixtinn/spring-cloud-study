@@ -1,4 +1,4 @@
-package calixto.study.token.security;
+package calixto.study.token.security.config;
 
 import calixto.study.core.config.JWTConfiguration;
 import lombok.RequiredArgsConstructor;
