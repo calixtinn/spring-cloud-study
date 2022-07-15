@@ -5,11 +5,13 @@ import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 
 @Configuration
 @ConfigurationProperties(prefix = "jwt.config")
 @Getter
 @Setter
+@Primary
 public class JWTConfiguration {
 
     private String loginUrl = "/login/**";

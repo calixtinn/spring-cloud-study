@@ -29,7 +29,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:8081/eureka/
     register-with-eureka: true
-    fetch-registry: true
 
+# Senha criptografada do usuário: (devdojo) $2a$10$LsQ4Am0xEacnk0lr599kY.GwKRc5afWcxT2rKMVCb4bk9mYxGbsAG
 
 
