@@ -17,6 +17,9 @@ spring:
             - Path=/auth/**
   main:
     web-application-type: reactive
+
+
+
 server:
   port: 8080
 eureka:
@@ -27,7 +30,7 @@ eureka:
       defaultZone: http://localhost:8081/eureka/
     register-with-eureka: true
     fetch-registry: true
-#jwt:
-#  config:
-#    login-url: /auth/login
+jwt:
+  config:
+    login-url: /auth/login
 

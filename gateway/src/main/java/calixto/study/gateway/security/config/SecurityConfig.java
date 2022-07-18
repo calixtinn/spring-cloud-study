@@ -2,29 +2,33 @@ package calixto.study.gateway.security.config;
 
 import calixto.study.core.config.JWTConfiguration;
 import calixto.study.gateway.security.filter.GatewayJWTTokenAuthorizationFilter;
-import calixto.study.token.security.config.SecurityTokenConfig;
 import calixto.study.token.security.token.converter.TokenConverter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
+import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
+import org.springframework.security.config.web.server.ServerHttpSecurity;
+import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
 
-@EnableWebSecurity
-public class SecurityConfig extends SecurityTokenConfig {
+@EnableWebFluxSecurity
+@RequiredArgsConstructor
+public class SecurityConfig {
 
     private final TokenConverter tokenConverter;
+    private final JWTConfiguration jwtConfiguration;
 
-    public SecurityConfig(JWTConfiguration jwtConfiguration, TokenConverter tokenConverter) {
-        super(jwtConfiguration);
-        this.tokenConverter = tokenConverter;
-    }
-
-    @Override
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.addFilterAfter(new GatewayJWTTokenAuthorizationFilter(jwtConfiguration, tokenConverter), UsernamePasswordAuthenticationFilter.class);
-        return super.filterChain(http);
+    public SecurityWebFilterChain filterChain(ServerHttpSecurity http) {
+        http.csrf().disable()
+                .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
+                .and()
+                .authorizeExchange()
+                .pathMatchers(jwtConfiguration.getLoginUrl()).permitAll()
+                .pathMatchers("/course/admin/**").hasRole("ADMIN")
+                .anyExchange().authenticated();
+        http.addFilterAfter(new GatewayJWTTokenAuthorizationFilter(jwtConfiguration, tokenConverter), SecurityWebFiltersOrder.AUTHORIZATION);
+        return http.build();
     }
 
 
